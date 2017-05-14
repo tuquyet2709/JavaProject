@@ -125,9 +125,9 @@ public class ChapterContent extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        Intent intent = getIntent();
-        Bundle bundle1 = intent.getBundleExtra("bundle_chapter");
-        String content = bundle1.getString("CONTENT");
+      //  Intent intent = getIntent();
+     //   Bundle bundle1 = intent.getBundleExtra("bundle_chapter");
+     //   String content = bundle1.getString("CONTENT");
         checkValidParagraph(content);
         txtChapterContent.setText(Html.fromHtml(content));
         Intent intent2 = new Intent(ChapterContent.this, SpellErrorActivity.class);
