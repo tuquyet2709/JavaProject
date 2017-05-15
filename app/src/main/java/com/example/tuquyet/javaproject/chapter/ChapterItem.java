@@ -13,8 +13,8 @@ public class ChapterItem implements Serializable{
     private int deID;
     private String deName;
     private String decontent;
-    private List<String> resultTmp;// 3 TH, 1 la null, 2 la 1 array khong co phan tu nao,
-    //
+    private List<String> resultTmp;
+
 
     public void setResultTmp(ArrayList resultTmp) {
         this.resultTmp = resultTmp;

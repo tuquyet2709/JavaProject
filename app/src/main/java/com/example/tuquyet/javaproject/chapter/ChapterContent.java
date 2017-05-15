@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tuquyet.javaproject.R;
 import com.example.tuquyet.javaproject.SpellErrorActivity;
@@ -20,7 +21,7 @@ import static android.text.Html.FROM_HTML_MODE_COMPACT;
 import static com.example.tuquyet.javaproject.spellcheckrule.Rule.checkValid;
 
 public class ChapterContent extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "MY_TAG_CHECK_MISTAKE";
+    private static final String TAG = "CHECK_MISTAKE";
     TextView txtChapterContent;
     TextView txtChapterName;
     ImageView imgCheck;
@@ -30,45 +31,59 @@ public class ChapterContent extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter_content);
         findViewById();
+        //Tao chapterItem de do du lieu vao
         ChapterItem chapterItemReceive = new ChapterItem(0, 0, "", "");
         Intent intent = getIntent();
         chapterItemReceive = (ChapterItem) intent.getSerializableExtra("Chapter");
+        // Noi dung truyen
         content = chapterItemReceive.getDecontent();
         String chapterName = chapterItemReceive.getDeName();
         arrayListToSearch = chapterItemReceive.getResultTmp();
-        if((arrayListToSearch) != null) findAndHighLight();
-        //HighlightWord highlight = new HighlightWord();
+
+        if ((arrayListToSearch) != null) findAndHighLight();
         txtChapterContent.setText(Html.fromHtml(content));
         txtChapterName.setText(chapterName);
         imgCheck.setOnClickListener(this);
     }
 
+    private String toChange(String word) {
+        return "<font color=\"red\">" + word + "</font>";
+    }
+
+    public String takeLast(String s) {
+        int i = s.lastIndexOf(' ');
+        s = s.substring(i + 1);
+        return s;
+    }
+
+    public String takeFirst(String s) {
+        int i = s.lastIndexOf(' ');
+        s = s.substring(0, i);
+        return s;
+    }
+
+
     private void findAndHighLight() {
+        String s = "";
         for (int i = 0; i < arrayListToSearch.size(); i++) {
-//            List<String> list = new ArrayList<>();
-//            list =  arrayListToSearch.get(i);
+            String wordCurrent = arrayListToSearch.get(i);
+            s += wordCurrent + "\n";
 
-//            for (int j = 0; j < list.size(); j++) {
-            String word = arrayListToSearch.get(i);
-            Log.e(TAG, "findAndHighLight: tu can phai tim" +word );
-            String toChange =  "<font color=\"red\">" + word + "</font>";
-             content = content.replaceAll(word,toChange);
-
-                Log.e(TAG, "==========>" + content);
-
-            //    }
-            txtChapterContent.setText(content);
-
+            content = content.replaceAll(wordCurrent, toChange(wordCurrent));
+            content = content.replaceAll(takeLast(wordCurrent), toChange(takeLast(wordCurrent)));
         }
+        if (s != "")
+            Toast.makeText(this, "Tìm kiếm cho : \n" + s, Toast.LENGTH_LONG).show();
 
     }
 
     public void checkValidParagraph(String mTmpContent) {
-        //String mTmpContent = new String(mTmpContent);
-        // mTmpContent = "THIÊN NHAI TƯ QUÂN BẤT KHẢ VONG-<br/>\t\t\t\t\t\t   Chữ tình buộc lấy chữ sầu,<br/>Chân trời góc biển tìm đâu";
+//       mTmpContent = new String(mTmpContent);
+//       mTmpContent = "huỳnh ănh ăn của bống bang absnfh 55 ?ud ?ud!";
         mTmpContent = removeHtmlTag(mTmpContent);
         mTmpContent = mTmpContent.replaceAll("\\W", " ");
         String[] mang;
@@ -80,28 +95,17 @@ public class ChapterContent extends AppCompatActivity implements View.OnClickLis
                     Xau key = new Xau(tmp);
                     boolean result = checkValid(key);
                     if (result == false) {
-                        //Log.d(TAG, "mTmpContent: \"" + mContent + "\"");
-//                        Log.d(TAG, "mTmpContent: \"" + mTmpContent + "\"");
-                        //                     Log.d(TAG, "key.getXau(): \"" + key.getXau() + "\"");
-                        //Log.d(TAG, "result: " + result + "\n");
                         String word = key.getXau();
                         arrayListMistake.add(word);
 
-                        Log.e("MY_TAG", "tmp :" + tmp + "");
-
-                        mTmpContent = mTmpContent.replaceAll(tmp, "hiiiiiiiiiiiiiiiiiiii");
-//                        word = "<font style = background-color : #00ff00>"+word+"</font>";
-                        Log.e("MY_TAG", "mtp :" + mTmpContent + "");
 
                     }
 
                 }
             }
         }
-//        for (int j = 0; j < arrayListMistake.size(); j++) {
-//            Log.i(TAG, "mistake: "+arrayListMistake.get(j));
-//        }
     }
+
 
     public static String removeHtmlTag(String mContentWithHtmlTag) {
         String content = new String(mContentWithHtmlTag);
@@ -111,7 +115,6 @@ public class ChapterContent extends AppCompatActivity implements View.OnClickLis
         } else {
             content = android.text.Html.fromHtml(mContentWithHtmlTag).toString();
         }
-        // Log.e(TAG, "checkValidParagraph: mContent_before: \"" + content + "\"");
         return content;
 
     }
@@ -125,13 +128,11 @@ public class ChapterContent extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-      //  Intent intent = getIntent();
-     //   Bundle bundle1 = intent.getBundleExtra("bundle_chapter");
-     //   String content = bundle1.getString("CONTENT");
         checkValidParagraph(content);
         txtChapterContent.setText(Html.fromHtml(content));
         Intent intent2 = new Intent(ChapterContent.this, SpellErrorActivity.class);
         intent2.putStringArrayListExtra("ArrayMistake", arrayListMistake);
+        intent2.putExtra("ArrayMistakeSize", arrayListMistake.size());
         startActivity(intent2);
     }
 

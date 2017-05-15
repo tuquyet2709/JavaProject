@@ -48,18 +48,21 @@ public class StoryChapterActivity extends AppCompatActivity {
         Bundle bundle1 = intent1.getBundleExtra("bundle1");
         final int idStory = bundle1.getInt("ID2", 0);
         final String storyName = bundle1.getString("StoryName");
+        //Lay danh sach chapter tu idStory gui tu Descreption
         getStoryChapter(idStory);
         findViewById();
         mStoryNameInChapter.setText(storyName);
         mChapterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mChapterAdapter = new ChapterAdapter(mChapterLists, getApplicationContext());
         mChapterRecyclerView.setAdapter(mChapterAdapter);
+        //Bat giong noi
         img_micro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imgToOpenMic();
             }
         });
+        //Search
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +99,7 @@ public class StoryChapterActivity extends AppCompatActivity {
     private void imgToSearch() {
         // TODO: 14/05/2017
         searchTextInput = text.getText().toString();
+        searchTextInput = searchTextInput.trim();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -109,9 +113,7 @@ public class StoryChapterActivity extends AppCompatActivity {
     private void getStoryChapter(int id) {
         SQLiteStoryChapter storyChapterSQL = new SQLiteStoryChapter(getApplicationContext());
         mChapterLists = storyChapterSQL.getStoryChapters(id);
-//        for (int i = 0; i < mChapterLists.size(); i++) {
-//            Log.e("MY_TAG", "getStoryChapterkkk: " +i +mChapterLists.get(i).getDeName()+"");
-//        }
+
     }
 
 
@@ -146,12 +148,10 @@ public class StoryChapterActivity extends AppCompatActivity {
             for (int i = 0; i < mChapterLists.size(); i++) {
                 String deContent = ChapterContent.removeHtmlTag(mChapterLists.get(i).getDecontent());
                 deContent = deContent.replaceAll("\\W", " ");
+                searchTextInput = searchTextInput.toLowerCase() ; //chuyen thanh chu thuong h
                 mChapterLists.get(i).setResultTmp(search(deContent, searchTextInput));
                 result.add(mChapterLists.get(i).getResultTmp());
 
-            }
-            for (int i = 0; i < result.size(); i++) {
-                Log.e(TAG, "doInBackground: get" + i + result.get(i));
             }
 
             return null;

@@ -5,30 +5,27 @@ import static com.example.tuquyet.javaproject.spellcheckrule.Charcode.nguyenAmDa
 import static com.example.tuquyet.javaproject.spellcheckrule.Charcode.notPhuAmCuoi;
 import static com.example.tuquyet.javaproject.spellcheckrule.Charcode.phuAmCuoi;
 
-public class Xau {
-    String xau;
-    String phu_am_dau;
-    String nguyen_am;
-    String phu_am_cuoi;
-    int so_nguyen_am;
-    int so_phu_am;
 
-    public String getXau() {
-        return xau;
-    }
+public class Xau {
+    private String xau;
+    private String phu_am_dau;
+    private String nguyen_am;
+    private String phu_am_cuoi;
+    private int so_nguyen_am;
+    private int so_phu_am;
 
     public Xau (String xau){
         int i=0;
         ///xử lý khi xâu đi liền với dấu
         //loai bo cac ky tu dau xau la cac dau " (
-        while ((xau.charAt(i)=='"')||(xau.charAt(i)=='(')||(xau.charAt(i)=='\t')){
-            xau = xau.substring(0, i) + xau.substring(i + 1);
-            if(xau.length()==0) break;
+        if ((xau.charAt(0)=='"')||(xau.charAt(0)=='(')||(xau.charAt(0)=='\t')){
+            xau = xau.substring(1);//(0, i) + xau.substring(i + 1);
+
         }
         //loai bo cac ky tu cuoi xau la cac dau !"#$%&'()*+,-./0123456789:;<=>?@[\]^_`
         i=xau.length()-1;
         if(i>=0){
-            while (( (64>=xau.charAt(i))&&(xau.charAt(i))>=32 )||( (96>=xau.charAt(i))&&(xau.charAt(i))>=91 ) ){
+            while (".,?[]):\"!0123456789".contains(String.valueOf(xau.charAt(i))) ){
                 xau = xau.substring(0, i);
                 i--;
                 if(i==-1) break;
@@ -38,12 +35,12 @@ public class Xau {
         this.xau=xau.toLowerCase();
     }
 
-    public void setXau(String s1, String s2, String s3, int i1, int i2){
+    private void setXau(String s1, String s2, String s3, int i1, int i2){
         phu_am_dau=s1; nguyen_am=s2; phu_am_cuoi=s3;
         so_nguyen_am=i1; so_phu_am=i2;
     }
 
-    public boolean binSearch(String x, String[] array){
+    private boolean binSearch(String x, String[] array){
         int first=0;
         int last=array.length;
         while (first<last){
@@ -58,32 +55,22 @@ public class Xau {
 
     }
 
-    public boolean isNguyenAm(String x){
-        return binSearch(x, nguyenAm);
+    private boolean isNguyenAm(String x){
+        return binSearch(x, Charcode.nguyenAm);
     }
 
     public boolean isPhuAm(String x) {
-        if(binSearch(x,notPhuAmCuoi)!=true)
-            return (binSearch(x,phuAmCuoi));
+        if(binSearch(x,Charcode.notPhuAmCuoi)!=true)
+            return (binSearch(x,Charcode.phuAmCuoi));
         return true;
     }
 
-    public boolean isPhuAmCuoi(String x){
-        return (binSearch(x,phuAmCuoi));
+    private boolean isPhuAmCuoi(String x){
+        return (binSearch(x,Charcode.phuAmCuoi));
     }
 
-    public boolean isNguyenAmDacBiet(char x){
-        int first=0;
-        int last=nguyenAmDacBiet.length;
-        while (first<last){
-            int mid=(first+last)/2;
-            if (x<nguyenAmDacBiet[mid]) last=mid;
-            else {
-                if (x>nguyenAmDacBiet[mid]) first=mid+1;
-                else {return true;}
-            }
-        }
-        return false;
+    public boolean isNguyenAmDacBiet(String x){
+        return (binSearch(x,Charcode.nguyenAmDacBiet));
     }
 
     public boolean tachXau(){
@@ -122,5 +109,29 @@ public class Xau {
         if((tmpPAD.compareTo("")!=0)&&(tmpNA.compareTo("")==0)) return false; //neu co phu am ma khong co nguyen am thi sai
         setXau(tmpPAD,tmpNA,tmpPAC,so_nguyen_am,so_phu_am);
         return true;
+    }
+
+    public String getXau() {
+        return xau;
+    }
+
+    public String getPhu_am_dau() {
+        return phu_am_dau;
+    }
+
+    public String getNguyen_am() {
+        return nguyen_am;
+    }
+
+    public String getPhu_am_cuoi() {
+        return phu_am_cuoi;
+    }
+
+    public int getSo_nguyen_am() {
+        return so_nguyen_am;
+    }
+
+    public int getSo_phu_am() {
+        return so_phu_am;
     }
 }

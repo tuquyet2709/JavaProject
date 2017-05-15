@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class Search {
 
-    public static void main(String[] args) {
-        String content = "một con vịt xòe ra hai cái cánh. con vịt ăn con gà. gà thì lại ăn trứng vịt";
-        String keywords = "vịt cánh gà";
-        ArrayList<String> result = new ArrayList<>();
-        result = search(content, keywords);
-        if (result!=null)
-            for (int i =0; i<result.size();i++){System.out.println(result.get(i));}
-
-    }
+//    public static void main(String[] args) {
+//        String content = "một con vịt xòe ra hai cái cánh. con vịt ăn con gà. gà thì lại ăn trứng vịt";
+//        String keywords = "vịt cánh gà";
+//        ArrayList<String> result = new ArrayList<>();
+//        result = search(content, keywords);
+//        if (result!=null)
+//            for (int i =0; i<result.size();i++){System.out.println(result.get(i));}
+//
+//    }
 
     public static  ArrayList<String> search(String content, String keywords) {
         ArrayList<String> listKeyword = splitKeywords(keywords);
@@ -23,11 +23,8 @@ public class Search {
             int check=0;
             for (int c = begin; c < listContentWords.size(); c++) {
                 String tmpContentWords = listContentWords.get(c).trim().toLowerCase();
-
-                //System.out.print(tmpContentWords);
                 if (listKeyword.get(k).equals(tmpContentWords)) {
                     check=1;
-                    //System.out.println("listKeyword.get(k): "+listKeyword.get(k)+" listContentWords.get(c):"+listContentWords.get(c)+" check=1"+" c="+c);
                     int match = c;
                     if (match - 1 >= 0) {
                         String tmp = listContentWords.get(match-1);

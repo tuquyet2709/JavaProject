@@ -41,15 +41,16 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     public void onBindViewHolder(ViewHolder2 holder, final int position) {
 
         if (chapterItemArrayList.get(position).getResultTmp() == null) {
-            // khong co kq thoa man
+            // khong co kq thoa man --> boi do
             holder.cardViewChapterItem.setBackgroundColor(Color.RED);
         }
         else if (chapterItemArrayList.get(position).getResultTmp().size() == 0) {
-            // chua search
+            // chua search --> giu nguyen mau trang
             holder.cardViewChapterItem.setBackgroundColor(Color.WHITE);
 
         }
         else {
+            //thoa man --> boi xanh
             holder.cardViewChapterItem.setBackgroundColor(Color.GREEN);
 
         }
@@ -57,7 +58,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
         holder.cardViewChapterItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Gui object chapter qua de xu ly
                 Intent intent = new Intent(context, ChapterContent.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("Chapter", chapterItemArrayList.get(position));

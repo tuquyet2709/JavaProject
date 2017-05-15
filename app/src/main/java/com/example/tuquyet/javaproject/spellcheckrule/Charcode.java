@@ -3,7 +3,7 @@ package com.example.tuquyet.javaproject.spellcheckrule;
 import java.util.Arrays;
 
 /**
- * Created by tmd on 03/05/2017.
+ * Created by tuquyet on 03/05/2017.
  */
 
 public class Charcode {
@@ -11,7 +11,7 @@ public class Charcode {
     public final static String[] notPhuAmCuoi = {"b", "d", "đ", "g", "h", "k", "l", "qu",
             "r", "s", "v", "x", "gh", "gi", "kh", "ph", "q",
             "th", "tr", "ngh", "c", "ng", "nh", "ch", "m",
-            "n", "p", "t", ""};
+            "n", "p", "t"};
     public final static String[] nguyenAm = {
             "a", "à", "á", "ả", "ã", "ạ",
             "ai", "ài", "ái", "ải", "ãi", "ại",
@@ -64,13 +64,13 @@ public class Charcode {
             "ưi", "ừi", "ứi", "ửi", "ữi", "ựi",
             "ươ", "ườ", "ướ", "ưở", "ưỡ", "ượ",
             "ươi", "ười", "ưới", "ưởi", "ưỡi", "ượi",
-            "ươu", "ườu", "ượu",
+            "ươu","ướu", "ườu","ưởu", "ượu", "ưỡu",
             "ưu", "ừu", "ứu", "ửu", "ữu", "ựu",
             "y", "ỳ", "ý", "ỷ", "ỹ", "ỵ",
             "yê", "yề", "yế", "yể", "yễ", "yệ",
             "yêu", "yều", "yếu", "yểu", ""
     };
-    public final static char[] nguyenAmDacBiet = {'e', 'è', 'é', 'ẻ', 'ẽ', 'ẹ', 'ê', 'ề', 'ế', 'ể', 'ễ', 'ệ', 'i', 'ì', 'í', 'ỉ', 'ĩ', 'ị'};
+    public final static String[] nguyenAmDacBiet={"e", "è", "é", "ẻ", "ẽ", "ẹ","ê", "ề", "ế", "ể", "ễ", "ệ","i", "ì", "í", "ỉ", "ĩ", "ị"};
     public final static String[] nguyenAmDauSacvaNang = {
             "á", "ạ", "ắ", "ặ", "ấ", "ậ",
             "é", "ẹ", "ế", "ệ",

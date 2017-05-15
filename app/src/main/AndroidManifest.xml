@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -22,7 +22,6 @@
         <activity android:name=".chapter.StoryChapterActivity" />
         <activity android:name=".chapter.ChapterContent" />
         <activity android:name=".SpellErrorActivity" />
-        <activity android:name=".search.SearchActivity"></activity>
     </application>
 
 </manifest>

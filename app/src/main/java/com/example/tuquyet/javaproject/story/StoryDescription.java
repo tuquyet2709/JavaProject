@@ -20,7 +20,6 @@ public class StoryDescription extends AppCompatActivity {
     ImageView imgDescription;
     TextView txtDescription;
     Button buttonRead;
-    Button buttonSearch;
 
 
     @Override
@@ -30,7 +29,6 @@ public class StoryDescription extends AppCompatActivity {
         Intent mIntent = getIntent();
         final int id = mIntent.getIntExtra("ID", 0);
         final String storyName = mIntent.getStringExtra("StoryName");
-//        Log.e("----intvalue >",id+"");
         findViewById();
         //Set anh ben trong
         String mDrawableName = "bia_" + id;
@@ -40,7 +38,7 @@ public class StoryDescription extends AppCompatActivity {
         imgDescription.setImageDrawable(drawable);
 
         String s = mIntent.getStringExtra("String");
-        txtDescription.setMovementMethod(new ScrollingMovementMethod());
+        txtDescription.setMovementMethod(new ScrollingMovementMethod()); //Set co the scroll
         txtDescription.setText(Html.fromHtml(s));
 
         //Set su kien cho button

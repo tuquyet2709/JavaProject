@@ -18,19 +18,14 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView storyRecyclerView;
     private StoryStoreAdapter storyAdapter;
     private List<StoryItem> storyItemsList;
-    // ArrayList<ChapterItem> chapterLists = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("OOPS Project");
         //Khoi tao va lay danh sach truyen tu database
         createDB();
         getStory();
-//        getStoryChapter();
-
-        // sort charcode
         sortCharcode();
 
         storyRecyclerView = (RecyclerView) findViewById(R.id.story_recyclerview);
@@ -54,13 +49,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getStory() {
+        //lay truyen
         SQLiteStoryList storyListSql = new SQLiteStoryList(getApplicationContext());
         storyItemsList = storyListSql.getStoryLists();
 
     }
 
-//    private void getStoryChapter() {
-//        SQLiteStoryChapter storyChapterSQL = new SQLiteStoryChapter(getApplicationContext());
-//        chapterLists = storyChapterSQL.getStoryChapters();
-//    }
+
 }

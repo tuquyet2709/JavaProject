@@ -46,7 +46,6 @@ public class StoryStoreAdapter extends RecyclerView.Adapter<StoryStoreAdapter.Vi
         String mDrawableName = "bia_" + idStory;
         int resID = res.getIdentifier(mDrawableName, "drawable", context.getPackageName());
         Drawable drawable = res.getDrawable(resID);
-//        StoryItem item = mStoryItems.get(position);
         holder.imgBia.setImageDrawable(drawable);
         holder.txtStoryname.setText(storyItemsList.get(position).getmName());
         holder.txtDescription.setText(Html.fromHtml(storyItemsList.get(position).getmDescreption()));
@@ -54,6 +53,7 @@ public class StoryStoreAdapter extends RecyclerView.Adapter<StoryStoreAdapter.Vi
             @Override
             public void onClick(View v) {
 
+                // Gui ID, Descreption, Ten truyen qua Descreption de hien th
                 Intent intent = new Intent(context, StoryDescription.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         .putExtra("ID", storyItemsList.get(position).getStID())
@@ -86,8 +86,6 @@ public class StoryStoreAdapter extends RecyclerView.Adapter<StoryStoreAdapter.Vi
             txtDescription = (TextView) itemView.findViewById(R.id.textview_storydescription);
             cardViewStoryItem = (CardView) itemView.findViewById(R.id.cardview_story);
 
-
-            //     itemView.setOnClickListener(this);
 
 
         }
