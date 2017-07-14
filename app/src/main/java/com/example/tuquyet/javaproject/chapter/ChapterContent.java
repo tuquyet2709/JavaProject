@@ -82,8 +82,6 @@ public class ChapterContent extends AppCompatActivity implements View.OnClickLis
     }
 
     public void checkValidParagraph(String mTmpContent) {
-//       mTmpContent = new String(mTmpContent);
-//       mTmpContent = "huỳnh ănh ăn của bống bang absnfh 55 ?ud ?ud!";
         mTmpContent = removeHtmlTag(mTmpContent);
         mTmpContent = mTmpContent.replaceAll("\\W", " ");
         String[] mang;

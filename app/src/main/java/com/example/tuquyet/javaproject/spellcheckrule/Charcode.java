@@ -55,7 +55,7 @@ public class Charcode {
             "uô", "uồ", "uố", "uổ", "uỗ", "uộ",
             "uôi", "uồi", "uối", "uổi", "uỗi", "uội",
             "uơ", "uớ", "uở",
-            "uy", "ùy", "úy", "ủy", "ũy", "ụy", "uý", "uỵ",
+            "uy", "ùy", "úy", "ủy", "ũy", "ụy", "uý", "uỵ", "uỳ",
             "uya",
             "uyê", "uyề", "uyế", "uyể", "uyễ", "uyệ",
             "uỷu", "uỵu",
